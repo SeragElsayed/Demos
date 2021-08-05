@@ -1,0 +1,18 @@
+﻿.internalEvent {
+    background-color: lightgreen !important;
+}
+
+.externalEvent {
+    background-color: tomato !important;
+}
+.tooltip-inner {
+   
+    color: black !important;
+    background-color: white !important;
+}
+.zindex2000 {
+    z-index: 2000 !important;
+}
+.user-panel .info {
+     padding:0 !important; 
+}

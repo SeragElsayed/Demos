@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "defaultProvider": "jsdelivr",
+  "libraries": [
+    {
+      "library": "fullcalendar@5.8.0",
+      "destination": "wwwroot/lib/fullcalendar/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "font-awesome@5.13.1",
+      "destination": "wwwroot/lib/font-awesome/"
+    }
+  ]
+}

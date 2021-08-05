@@ -1,0 +1,21 @@
+﻿using FullCalenderDemo.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace FullCalenderDemo.Services
+{
+    public interface IEventService
+    {
+        IEnumerable<Event> GetAll();
+
+        Event GetById(int id);
+
+        Task<Event> AddAsync(Event newEvent);
+
+        Event Update(Event updatedEvent);
+
+        Event Remove(int id);
+    }
+}

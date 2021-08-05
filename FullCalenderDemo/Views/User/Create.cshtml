@@ -1,0 +1,163 @@
+﻿@model FullCalenderDemo.ViewModels.CreateUserVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+
+
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0"> @ViewData["Title"]</h1>
+            </div><!-- /.col -->
+
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div class="content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+
+            <div class="card card-primary col-8">
+                <div class="card-header">
+                    <h3 class="card-title">User</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form asp-action="Create">
+
+                    <div class="card-body">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label asp-for="Roles"></label>
+                            <div class=" d-flex flex-column flex-wrap">
+
+                                @foreach (var role in Model.Roles)
+                                {
+                                                        @*<div style="padding-right:15px;margin-left:200px">
+                                        <input id="@role" type="checkbox" name="Roles" value="@role" />
+                                        <label for="@role">
+                                            @Enum.GetName(role);
+                                        </label>
+                                    </div>*@
+                                    <span class="form-check col-4" style="display:inline">
+                                        <input class="form-check-input" name="Roles" type="checkbox" id="@role" value="@role">
+                                        <label class="form-check-label" for="@role">
+                                            @Enum.GetName(role)
+                                        </label>
+                                    </span>
+                                }
+                            </div>
+
+                            <span asp-validation-for="Roles" class="text-danger"></span>
+                        </div>
+
+                        </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" value="Create" class="btn btn-primary">Create</button>
+                        <a asp-action="Index" class="btn btn-default float-right">Back to List</a>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<h1>Create</h1>
+
+<h4>CreateUserVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Roles" class="control-label"></label>
+
+                @foreach (var role in Model.Roles)
+                {
+                    <div style="padding-right:15px;margin-left:200px">
+                        <input id="@role" type="checkbox" name="Roles" value="@role" />
+                        <label for="@role">
+                            @Enum.GetName(role);
+                        </label>
+                    </div>
+                }-->
+
+                @*<input asp-for="ConfirmPassword" class="form-control" />*@
+                <!--<span asp-validation-for="Roles" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
