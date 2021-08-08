@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDBDemo.Models;
 using MongoDBDemo.Repos;
 using MongoDBDemo.ViewModels;
+using MongoDBDemo.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,9 @@ namespace MongoDBDemo.Controllers
         [HttpGet("~/Index")]
         public ActionResult Index()
         {
+            //throw new Exception("test exception");
             var allProjects = _projectRepo.GetAll();
-            return Ok(allProjects);
+            return Ok(new OperationResult<IEnumerable<Project>>(allProjects));
         }
         [HttpGet]
 
@@ -31,7 +33,7 @@ namespace MongoDBDemo.Controllers
         public ActionResult Details(string id)
         {
             var project = _projectRepo.GetById(id);
-            return Ok(project);
+            return Ok(new OperationResult<Project>( project));
         }
 
 
@@ -43,7 +45,7 @@ namespace MongoDBDemo.Controllers
             try
             {
                 var createdProject = _projectRepo.Create(newProject);
-                return Created("Project", createdProject);
+                return Ok(new OperationResult<Project>(createdProject));
             }
             catch(Exception ex)
             {
@@ -58,7 +60,8 @@ namespace MongoDBDemo.Controllers
         {
             try
             {
-                return Ok(_projectRepo.Update(editedProject));
+                var updatedProject = _projectRepo.Update(editedProject);
+                return Ok(new OperationResult<Project>(updatedProject));
             }
             catch
             {
@@ -73,7 +76,8 @@ namespace MongoDBDemo.Controllers
         {
             try
             {
-                return Ok(_projectRepo.Delete(id));
+                var deletedProject = _projectRepo.Delete(id);
+                return Ok(new OperationResult<Project>(deletedProject));
             }
             catch
             {
@@ -84,13 +88,13 @@ namespace MongoDBDemo.Controllers
         public ActionResult GetProjectBySkillsRate(decimal minValue, decimal maxValue)
         {
             var projects = _projectRepo.GetProjectByRateValue(minValue,maxValue);
-            return Ok(projects);
+            return Ok(new OperationResult<IEnumerable<Project>>(projects));
         }
         [HttpPost("~/GetProjectBySkillsNames")]
         public ActionResult GetProjectBySkillsNames(IEnumerable<string> skillsNames)
         {
             var projects = _projectRepo.GetProjectBySkillsNames( skillsNames);
-            return Ok(projects);
+            return Ok(new OperationResult<IEnumerable<Project>>(projects));
         }
         [HttpPost("~/Search")]
         public ActionResult Search(ProjectSearchVM searchObj)
@@ -98,10 +102,10 @@ namespace MongoDBDemo.Controllers
             if (searchObj.SkillsNamesOperator == LogicalOperators.STATS)
             {
                 var skills = _projectRepo.GetSkillsStats(searchObj);
-                return Ok(skills);
+                return Ok(new OperationResult<IEnumerable<SkillsStatsVM>>(skills));
             }
             var projects = _projectRepo.Search(searchObj);
-            return Ok(projects);
+            return Ok(new OperationResult<IEnumerable<Project>>(projects));
         }
     }
 }

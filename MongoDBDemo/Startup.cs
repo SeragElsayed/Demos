@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MongoDBDemo.Middlewares;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,15 +35,15 @@ namespace MongoDBDemo
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+               // app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MongoDBDemo v1"));
             }
-
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseMiddleware<HeadersValidator>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
