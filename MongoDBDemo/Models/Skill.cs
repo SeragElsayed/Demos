@@ -11,7 +11,7 @@ namespace MongoDBDemo.Models
     public class Skill
     {
         public string Name { get; set; }
-        [BsonRepresentation(BsonType.Decimal128)]
+        [BsonRepresentation(BsonType.Double, AllowTruncation = true)]
         public decimal Rate { get; set; }
     }
 }

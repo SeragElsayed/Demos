@@ -17,5 +17,6 @@ namespace MongoDBDemo.Repos
         IEnumerable<Project> GetProjectBySkillsNames(IEnumerable<string> skillsNames);
         IEnumerable<Project> GetProjectByRateValue(decimal minValue, decimal maxValue);
         IEnumerable<Project> Search(ProjectSearchVM searchObj);
+        IEnumerable<SkillsStatsVM> GetSkillsStats(ProjectSearchVM searchObj);
     }
 }

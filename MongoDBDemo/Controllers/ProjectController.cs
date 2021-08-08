@@ -95,6 +95,11 @@ namespace MongoDBDemo.Controllers
         [HttpPost("~/Search")]
         public ActionResult Search(ProjectSearchVM searchObj)
         {
+            if (searchObj.SkillsNamesOperator == LogicalOperators.STATS)
+            {
+                var skills = _projectRepo.GetSkillsStats(searchObj);
+                return Ok(skills);
+            }
             var projects = _projectRepo.Search(searchObj);
             return Ok(projects);
         }

@@ -14,6 +14,6 @@ namespace MongoDBDemo.ViewModels
     }
     public enum LogicalOperators
     {
-        AND,OR,ONLY
+        AND,OR,ONLY,STATS
     }
 }
